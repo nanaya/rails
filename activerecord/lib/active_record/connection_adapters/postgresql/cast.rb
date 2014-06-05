@@ -20,7 +20,8 @@ module ActiveRecord
           when 'infinity'; Float::INFINITY
           when '-infinity'; -Float::INFINITY
           when / BC$/
-            super("-" + string.sub(/ BC$/, ""))
+            astronomical_year = format("%04d", string[/^\d+/].to_i - 1)
+            super("-#{string.sub(/ BC$/, "").sub(/^\d+/, astronomical_year)}")
           else
             super
           end
